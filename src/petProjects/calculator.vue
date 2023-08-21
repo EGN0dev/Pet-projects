@@ -107,9 +107,6 @@ export default defineComponent({
      } 
     }
 
-      const resultMaxLenght = (result:string) => {
-
-      }
 
       const zero = () => {if (result.value != '0'){result.value += '0'}}
       const one = () => result.value += '1'
