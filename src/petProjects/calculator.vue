@@ -15,7 +15,7 @@ export default defineComponent({
       
 
     setup(){
-      const buttonsColor = ref <string>("border-black border-2 rounded-full w-20 h-20 bg-indigo-200 relative")
+      const buttonsColor = ref <string>("border-black border-2 rounded-full w-20 h-20 bg-white relative")
       const firstVHolder = ref<string>('')
       const secondVHolder = ref<string>('')
       const result = ref<string>('')
@@ -137,13 +137,13 @@ export default defineComponent({
 
 <template>
 
-<div class="border-black border-2  w-screen h-screen bg-neutral-700 flex items-center justify-center">
+<div class=" w-screen h-screen  flex items-center justify-center">
 
-  <div class="border-black border-2 rounded-2xl bg-neutral-400 h-[800px] w-[400px] ">
+  <div class="border-black border-2 rounded-2xl bg-neutral-400 h-[700px] w-[400px] ">
 
-    <div><p class="border-black border-2 rounded-3xl h-[80px] w-[350px] mt-[40px] ml-[25px] mb-[40px]  text-6xl bg-indigo-200 "> {{ result.substring(0,9) }} </p></div>
+    <div><p class="border-black border-2 rounded-3xl h-[80px] w-[350px] mt-[40px] ml-[25px] mb-[40px]  text-6xl bg-white "> {{ result.substring(0,9) }} </p></div>
 
-        <div class=" grid grid-cols-3 gap-6 ml-[30px]">
+        <div class=" grid grid-cols-3 gap-2 ml-[30px]">
           <div> <button :class="buttonsColor" @click="comma">.</button> </div>
           <div> <button :class="buttonsColor" @click="addMinus">p/m</button> </div>
           <div> <button :class="buttonsColor" @click="divide">/</button> </div>

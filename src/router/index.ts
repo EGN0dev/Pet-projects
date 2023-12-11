@@ -1,10 +1,9 @@
 import { createWebHistory, createRouter } from "vue-router";
-
-
-
 import index from '../petProjects/index.vue'
 import calculator from '../petProjects/calculator.vue';
 import tictactoe from '../petProjects/tictactoe.vue'
+import galleryViewer from "../petProjects/galleryViewer.vue";
+
 
 const routes = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,24 +17,36 @@ const routes = createRouter({
   {
     path: "/",
     name: "index",
-    component: index
+    component: index,
+    children: [
+      {
+        path: "/Calculator",
+        name: "Calculator",
+        component: calculator
+      },
+    
+      {
+        path: "/tictactoe",
+        name: "tictactoe",
+        component: tictactoe
+      },
+
+      {
+        path: "/galleryViewer",
+        name: "galleryViewer",
+        component: galleryViewer
+      },
+
+      
+    ]
   },
 
-  {
-    path: "/Calculator",
-    name: "Calculator",
-    component: calculator
-  },
 
-  {
-    path: "/tictactoe",
-    name: "tictactoe",
-    component: tictactoe
-  },
+
+
+
+  
 ]
-
-
-
 });
 
 export default routes;

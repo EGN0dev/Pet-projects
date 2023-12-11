@@ -3,7 +3,7 @@ import { defineComponent,ref } from 'vue';
 
 export default defineComponent ({
     setup(){
-        const buttonsColor = ref <string>("border-black border-2  w-40 h-40 bg-indigo-200 relative ")
+        const buttonsColor = ref <string>("border-black border-2  w-40 h-40 bg-white relative text-8xl ")
 
         const cageNum1 = ref <boolean> (false)
         const cageNum2 = ref <boolean> (false)
@@ -134,8 +134,8 @@ export default defineComponent ({
 
 <template>
 
-<div class="border-black border-2  w-screen h-screen bg-neutral-700 flex items-center justify-center">
-  <div class="border-black border-2 rounded-2xl bg-neutral-400 h-[800px] w-[800px] flex items-center justify-center">
+<div class=" w-screen h-screen flex items-center justify-center">
+  <div class="border-black border-2 rounded-2xl bg-neutral-400 h-[600px] w-[600px] flex items-center justify-center">
       <div class="display: grid grid grid-cols-3 "> 
         <div> <button :disabled='buttonsDisabler1' :class="buttonsColor" @click="cageNumFunc1" >{{ resultCageNum1 }}</button> </div>
         <div> <button :disabled='buttonsDisabler2' :class="buttonsColor" @click="cageNumFunc2" >{{ resultCageNum2 }}</button> </div>
