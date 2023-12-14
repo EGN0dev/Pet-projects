@@ -11,9 +11,36 @@ export default defineComponent({
         const inpt = ref("")
         
         const imageDataArray = ref<string[]>([])
+        const testArray = ref<string[]>([])
         const imageData = ref<string>("")
         const imageGalleryElement = ref<string>("images") 
         const index0fActive = ref<number>(0)
+
+        const onDragOver = (event) => {
+            event.preventDefault()
+            event.dataTransfer.dropEffect = "copy"
+        }
+
+        const onDragLeave = (event) => {
+            event.preventDefault()
+           
+        }
+
+        const onDrop = (event) => {
+            event.preventDefault()
+            let files = event.dataTransfer.files
+           // imageDataArray.value = imageDataArray.value.concat(files)
+           for (let i = 0; i < files.length; i++){
+                imageDataArray.value.push(URL.createObjectURL(files[i])) 
+           }
+         //testArray.value = testArray.value.concat(files)
+        }
+        
+
+
+
+
+
         const changePic = (index) =>{
             imageData.value=imageDataArray.value[index]
             imageGalleryElement.value='imagesSelected'
@@ -41,7 +68,8 @@ export default defineComponent({
                 reader.readAsDataURL(input.files[0]);
                
              
-                console.log('uploaded')
+               // imageDataArray.value.forEach((value)=>console.log(value))
+                
             }
         }
             
@@ -50,7 +78,7 @@ export default defineComponent({
 
 
 
-        return {previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive,inpt}
+        return {onDrop,onDragLeave,onDragOver,previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive,inpt,testArray}
 
         }
        
@@ -68,7 +96,7 @@ export default defineComponent({
         <div class="main">
     
 
-            <div class="file-upload-form">
+           <!-- <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
                 Drag an image file or:
                 <input type="file" @change="previewImage" accept="image/*">
             </div>
@@ -88,12 +116,42 @@ export default defineComponent({
             
       
                 </div>
+            -->
+
+
+            <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
+                Drag an image file or:
+                <input type="file" @change="previewImage" accept="image/*">
+            </div>
+
+            <div class="bodyGallery" v-if="imageData != '' ">
+
+            <div class="image-preview" v-if="imageData != '' ">
+                <img class="preview" :src="imageData">
+            </div>
+
+            <div  v-if="imageDataArray.length > 0">
+              <div  v-for="(image,index) in imageDataArray"> 
+               <img :class="(index==index0fActive) ? imageGalleryElement='images' :  imageGalleryElement='imagesSelected' " :src="image" @click="changePic(index)"/>
+            </div>
+
+            </div>
+            
+      
+                </div>
+
+
+
+
+
   </div>
                     
           
 
 
-
+  <div  v-for="(image) in testArray"> 
+               <img class="images" :src="image"/>
+            </div>
   
     
 
