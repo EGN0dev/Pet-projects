@@ -14,7 +14,7 @@ export default defineComponent({
         const testArray = ref<string[]>([])
         const imageData = ref<string>("")
         const imageGalleryElement = ref<string>("images") 
-        const index0fActive = ref<number>(0)
+        const index0fActive = ref<number>()
 
         const onDragOver = (event) => {
             event.preventDefault()
@@ -32,6 +32,8 @@ export default defineComponent({
            // imageDataArray.value = imageDataArray.value.concat(files)
            for (let i = 0; i < files.length; i++){
                 imageDataArray.value.push(URL.createObjectURL(files[i])) 
+                imageData.value = URL.createObjectURL(files[0])
+                
            }
          //testArray.value = testArray.value.concat(files)
         }
@@ -96,32 +98,11 @@ export default defineComponent({
         <div class="main">
     
 
-           <!-- <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
-                Drag an image file or:
-                <input type="file" @change="previewImage" accept="image/*">
-            </div>
-
-            <div class="bodyGallery" v-if="imageData != '' ">
-
-            <div class="image-preview" v-if="imageData != '' ">
-                <img class="preview" :src="imageData">
-            </div>
-
-            <div  v-if="imageDataArray.length > 0">
-              <div  v-for="(image,index) in imageDataArray"> 
-               <img :class="(index==index0fActive) ? imageGalleryElement='images' :  imageGalleryElement='imagesSelected' " :src="image" @click="changePic(index)"/>
-            </div>
-
-            </div>
-            
-      
-                </div>
-            -->
-
-
             <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
                 Drag an image file or:
-                <input type="file" @change="previewImage" accept="image/*">
+              
+                <input class="buttonFile" type="file" @change="previewImage" accept="image/*">
+          
             </div>
 
             <div class="bodyGallery" v-if="imageData != '' ">
@@ -139,9 +120,7 @@ export default defineComponent({
             
       
                 </div>
-
-
-
+            
 
 
   </div>
@@ -149,9 +128,7 @@ export default defineComponent({
           
 
 
-  <div  v-for="(image) in testArray"> 
-               <img class="images" :src="image"/>
-            </div>
+
   
     
 
@@ -198,7 +175,26 @@ export default defineComponent({
     width: auto;
     border: solid;
     border-radius: 30px;
+    
 }
+
+.buttonFile {
+    
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(39 39 42);
+    color: rgb(255 255 255);
+    margin-left:5px;
+    margin-top:7px;
+    height: 40px;
+    width: 130px;
+    border: solid;
+    border-radius: 30px;
+    
+}
+
+
 
 .file-upload-form {
 
@@ -261,6 +257,13 @@ width: 200px;
 height: 100px;
 
 }
+
+::file-selector-button {
+  display: none;
+}
+
+
+
 
 
 </style>
