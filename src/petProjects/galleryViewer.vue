@@ -99,9 +99,10 @@ export default defineComponent({
     
 
             <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
-                Drag an image file or:
+                Drag an image file here or:
               
-                <input class="buttonFile" type="file" @change="previewImage" accept="image/*">
+                <input class="upload_btn" type="file" @change="previewImage" accept="image/*">
+                <div class="overlay-layer">Upload photo</div>
           
             </div>
 
@@ -113,7 +114,7 @@ export default defineComponent({
 
             <div  v-if="imageDataArray.length > 0">
               <div  v-for="(image,index) in imageDataArray"> 
-               <img :class="(index==index0fActive) ? imageGalleryElement='images' :  imageGalleryElement='imagesSelected' " :src="image" @click="changePic(index)"/>
+               <img class="images" :src="image" @click="changePic(index)"/>
             </div>
 
             </div>
@@ -145,6 +146,7 @@ export default defineComponent({
     }
 
     .bodyGallery {
+        margin-top: 10px;
         width: 70vw;
         height: 70vh;
        
@@ -153,8 +155,8 @@ export default defineComponent({
         border: 3px solid #DDD;
         
         display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
+        justify-content: flex-start;
+        flex-direction: row;
     
     }
 
@@ -198,7 +200,7 @@ export default defineComponent({
 
 .file-upload-form {
 
-
+    margin-top: 10px;
     align-items: center;
     display: flex;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -208,6 +210,7 @@ export default defineComponent({
     width: 500px;
     height: 100px;
     flex-direction: row;
+    border-radius: 30px;
 
 
 }
@@ -234,7 +237,7 @@ img.preview {
 .images {
     width: 250px;
     height: 100px;
-    border: 1px solid rgb(145, 14, 154);
+    border: 1px solid white;
     border-radius: 20px;
     margin-bottom: 5px;
     margin-top: 20px;
@@ -256,14 +259,59 @@ border: solid;
 width: 200px;
 height: 100px;
 
-}
 
-::file-selector-button {
-  display: none;
 }
 
 
+.overlay-layer{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position:absolute;
+    
+   
+    background-color:#000000;
+    z-index:0;
+  
 
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(39 39 42);
+    color: white;
+    margin-left:220px;
+    margin-top:7px;
+    height: 40px;
+    width: 200px;
+    border: solid;
+    border-radius: 30px;
+}
+.upload_btn{
+    cursor: pointer;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+  
+    
+  
+    z-index:10;
+    opacity:0;
+
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(39 39 42);
+    color: white;
+    margin-left:220px;
+    margin-top:7px;
+    height: 40px;
+    width: 200px;
+    border: solid;
+    border-radius: 30px;
+}
 
 </style>
