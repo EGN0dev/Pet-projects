@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent,ref } from 'vue';
+import { defineComponent,ref} from 'vue';
 import { RouterLink } from 'vue-router';
 
 
@@ -7,13 +7,11 @@ import { RouterLink } from 'vue-router';
 
 export default defineComponent({
     setup() {
-            const plus1 = ref<number>(0)
-            const puz1 = () => plus1.value++
-  
+         
 
-        return {plus1,puz1}
+        return {}
 
-        }
+     }
        
     
   
@@ -29,31 +27,26 @@ export default defineComponent({
                 <router-link class="button" to="/tictactoe">Go to tictactoe </router-link>
                 <router-link class="button" to="/galleryViewer">Go to galleryViewer </router-link>
             </div>
-            <div class="mainContainer">
-
-        
-            <router-view/>
-        </div>
-     </template>
+                <div class="mainContainer">
+                    <router-view/>
+                </div>
+    </template>
 
 <style>
+
 body{
- background-color: rgb(39 39 42); 
- display: flex;
+    background-color: rgb(39 39 42); 
+    display: flex;
     justify-content: flex-start;
-   
     flex-direction: row;
-
-
 }
+
 .mainContainer {
     display: flex;
     justify-content: center;
-        
-        
-       height: 100vh;
-        width: 100vw;
-    }
+    height: 100vh;
+    width: 100vw;
+}
 
 .navbar {
     display: flex;
@@ -97,6 +90,5 @@ body{
     padding-right: 10px;
     border-radius: 30px;
 }
-
 
 </style>
