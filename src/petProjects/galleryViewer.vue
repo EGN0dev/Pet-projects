@@ -10,16 +10,16 @@ export default defineComponent({
         const imageGalleryElement = ref<string>("images") 
         const index0fActive = ref<number>()
 
-        const onDragOver = (event) => {
+        const onDragOver = (event:any) => {
             event.preventDefault()
             event.dataTransfer.dropEffect = "copy"
         }
 
-        const onDragLeave = (event) => {
+        const onDragLeave = (event:any) => {
             event.preventDefault()
         }
 
-        const onDrop = (event) => {
+        const onDrop = (event:any) => {
             event.preventDefault()
             let files = event.dataTransfer.files
                  for (let i = 0; i < files.length; i++){
@@ -28,13 +28,13 @@ export default defineComponent({
            }
         }
         
-        const changePic = (index) =>{
+        const changePic = (index:number) =>{
             imageData.value=imageDataArray.value[index]
             imageGalleryElement.value='imagesSelected'
             index0fActive.value = index 
         }
 
-        const previewImage = (event) => {
+        const previewImage = (event:any) => {
                 var input = event.target;
                      // Ensure that you have a file before attempting to read it
                          if (input.files && input.files[0]) {
