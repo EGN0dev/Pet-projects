@@ -74,9 +74,6 @@ export default defineComponent({
 
     <template>
 
-        
-
-
         <div class="main">
         
                     <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
