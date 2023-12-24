@@ -15,9 +15,7 @@ export default defineComponent({
             event.dataTransfer.dropEffect = "copy"
         }
 
-        const onDragLeave = (event:any) => {
-            event.preventDefault()
-        }
+       
 
         const onDrop = (event:any) => {
             event.preventDefault()
@@ -62,7 +60,7 @@ export default defineComponent({
 
 
 
-        return {onDrop,onDragLeave,onDragOver,previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive}
+        return {onDrop,onDragOver,previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive}
 
         }
        
@@ -73,10 +71,10 @@ export default defineComponent({
 </script>
 
     <template>
-
+     
         <div class="main">
         
-                    <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
+                    <div class="file-upload-form"  @dragover.prevent="onDragOver" @drop.prevent="onDrop">
                         Drag an image file here or:
                             <input class="upload_btn" type="file" @change="previewImage" accept="image/*">
                                 <div class="overlay-layer">Upload photo</div>
@@ -88,8 +86,8 @@ export default defineComponent({
                                     <img class="preview" :src="imageData">
                             </div>
 
-                    <div  v-if="imageDataArray.length > 0">
-                            <div  v-for="(image,index) in imageDataArray"> 
+                    <div class="imagesContainer" v-if="imageDataArray.length > 0">
+                            <div v-for="(image,index) in imageDataArray"> 
                                 <img class="images" :src="image" @click="changePic(index)"/>
                             </div>
                     </div>
@@ -108,16 +106,35 @@ export default defineComponent({
         flex-direction: column;
     }
 
+    .imagesContainer {    
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 20px;
+        border: 3px solid #DDD;
+        gap: 10px;
+        width: auto;
+        padding-left: 12px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     .bodyGallery {
         margin-top: 10px;
-        width: 70vw;
+        width: 64vw;
         height: 70vh;
         border-color: rgb(2, 4, 6);
         border-radius: 20px;
         border: 3px solid #DDD;
         display: flex;
         justify-content: flex-start;
-        flex-direction: row;
+        flex-direction: column;
+        height: auto;
     }
 
     .boddy {
@@ -173,8 +190,8 @@ export default defineComponent({
     }
 
     img.preview {
-        width: 750px;
-        height: 550px;
+        width: 100%;
+        height: 100%;
         background-color: white;
         border-radius: 20px;
         border: 0.5px solid #DDD;
@@ -182,13 +199,10 @@ export default defineComponent({
     }
 
     .images {
-        width: 250px;
-        height: 100px;
+        width: 290px;
+        height: 120px;
         border: 1px solid white;
         border-radius: 20px;
-        margin-bottom: 5px;
-        margin-top: 20px;
-        padding: 5px;
     }
 
     .imagesSelected {
