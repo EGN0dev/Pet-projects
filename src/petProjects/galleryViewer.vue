@@ -1,10 +1,10 @@
 <script lang="ts">
 import { defineComponent,ref } from 'vue';
 
-
 export default defineComponent({
     setup() {
-
+        const imagePreview = ref<string>('image-preview')
+        const imagePreviewBool = ref<boolean>(false)
         const imageDataArray = ref<string[]>([])
         const imageData = ref<string>("")
         const imageGalleryElement = ref<string>("images") 
@@ -15,20 +15,16 @@ export default defineComponent({
             event.dataTransfer.dropEffect = "copy"
         }
 
-        const onDragLeave = (event:any) => {
-            event.preventDefault()
-        }
-
         const onDrop = (event:any) => {
             event.preventDefault()
             let files = event.dataTransfer.files
-                 for (let i = 0; i < files.length; i++){
-                     imageDataArray.value.push(URL.createObjectURL(files[i])) 
-                        imageData.value = URL.createObjectURL(files[0])
+            for (let i = 0; i < files.length; i++){
+            imageDataArray.value.push(URL.createObjectURL(files[i])) 
            }
         }
         
         const changePic = (index:number) =>{
+            imagePreviewBool.value = true
             imageData.value=imageDataArray.value[index]
             imageGalleryElement.value='imagesSelected'
             index0fActive.value = index 
@@ -41,63 +37,45 @@ export default defineComponent({
                                  // create a new FileReader to read this image and convert to base64 format
                                  var reader = new FileReader();
                                     // Define a callback function to run, when FileReader finishes its job
-
                                     reader.onload = (e) => {
                                         // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
                                             // Read image as base64 and set to imageData
-                                                imageData.value = e.target.result;
-                                                    imageDataArray.value.push(imageData.value)
-                }
+                                               // imageData.value = e.target.result;
+                                                let stringHolder:string = e.target.result;
+                                                    imageDataArray.value.push(stringHolder)}
                                                     // Start the reader job - read file as a data url (base64 format)
-                                                        reader.readAsDataURL(input.files[0]);
-               
-             
-              
-                
+                                                      reader.readAsDataURL(input.files[0]);
             }
         }
             
-
-
-
-
-
-        return {onDrop,onDragLeave,onDragOver,previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive}
+        return {onDrop,onDragOver,previewImage,changePic,imageData,imageDataArray,imageGalleryElement,index0fActive,imagePreview,imagePreviewBool}
 
         }
-       
-    
-  
 })
 
 </script>
 
     <template>
-
-        
-
-
+     
         <div class="main">
-        
-                    <div class="file-upload-form"  @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop">
+                    <div class="file-upload-form"  @dragover.prevent="onDragOver" @drop.prevent="onDrop">
                         Drag an image file here or:
                             <input class="upload_btn" type="file" @change="previewImage" accept="image/*">
                                 <div class="overlay-layer">Upload photo</div>
                     </div>
-
-                        <div class="bodyGallery" v-if="imageData != '' ">
-
-                            <div class="image-preview" v-if="imageData != '' ">
-                                    <img class="preview" :src="imageData">
+                    <div class="bodyGallery" v-if="imageDataArray.length != 0">
+                        <div class="image-preview" v-if="imagePreviewBool" >
+                            <img class="preview" :src="imageData">
+                        </div>
+                        <div class="imagePreviewHide" v-else="!imagePreviewBool" >
+                            <span>Choose picture below</span>
+                        </div>
+                        <div class="imagesContainer">
+                            <div v-for="(image,index) in imageDataArray"> 
+                                <img :class="(index==index0fActive) ? imageGalleryElement='imagesSelected' :  imageGalleryElement='images'"  :src="image" @click="changePic(index)"/>
                             </div>
-
-                    <div  v-if="imageDataArray.length > 0">
-                            <div  v-for="(image,index) in imageDataArray"> 
-                                <img class="images" :src="image" @click="changePic(index)"/>
-                            </div>
+                        </div>
                     </div>
-    
-                </div>
         </div>
                     
      </template>
@@ -111,16 +89,35 @@ export default defineComponent({
         flex-direction: column;
     }
 
+    .imagesContainer {    
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 20px;
+        border: 3px solid #DDD;
+        gap: 10px;
+        width: 100%;
+        padding-left: 12px;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
     .bodyGallery {
         margin-top: 10px;
-        width: 70vw;
+        width: 64vw;
         height: 70vh;
         border-color: rgb(2, 4, 6);
         border-radius: 20px;
         border: 3px solid #DDD;
         display: flex;
         justify-content: flex-start;
-        flex-direction: row;
+        flex-direction: column;
+        height: auto;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .boddy {
@@ -172,36 +169,48 @@ export default defineComponent({
     .image-preview {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         color: aliceblue;
-        padding: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     img.preview {
-        width: 750px;
-        height: 550px;
+        width: 100%;
+        height: 100%;
         background-color: white;
         border-radius: 20px;
         border: 0.5px solid #DDD;
         padding: 5px;
     }
 
-    .images {
-        width: 250px;
-        height: 100px;
-        border: 1px solid white;
+    .imagePreviewHide {
+        font-size: x-large;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        color: aliceblue;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
         border-radius: 20px;
-        margin-bottom: 5px;
+        border: 3px solid #DDD;
         margin-top: 20px;
-        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .images {
+        width: 290px;
+        height: 120px;
+        border: 2px solid white;;
+        border-radius: 20px;
+        cursor: pointer;
     }
 
     .imagesSelected {
-        width: 250px;
-        height: 100px;
-        border: 1px solid #DDD;
+        width: 290px;
+        height: 120px;
+        border: 2px solid purple;
         border-radius: 20px;
-        margin-bottom: 5px;
-        margin-top: 20px;
-        padding: 5px;
+        cursor: pointer;
     }
 
     .dropZone {

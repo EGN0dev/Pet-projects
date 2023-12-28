@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent,ref} from 'vue';
+import { defineComponent,ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 
@@ -51,14 +51,16 @@ body{
 .navbar {
     display: flex;
     justify-content: flex-start;
-    flex-direction: row;
+    flex-direction: row;  
+    flex-wrap: wrap;
     width: auto;
     position: relative;
-    height: 60px;
+    height: auto;
     color: rgb(255 255 255);
     border: solid;
     border-radius: 30px;
     background-color: rgb(39 39 42);
+    padding-bottom: 7px;
 }
 
 .button {
