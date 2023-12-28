@@ -1,10 +1,8 @@
 <script lang="ts">
 import { defineComponent,ref } from 'vue';
 
-
 export default defineComponent({
     setup() {
-        const onErrorValue = ref<string>(`this.style.display='none'`)
         const imagePreview = ref<string>('image-preview')
         const imagePreviewBool = ref<boolean>(false)
         const imageDataArray = ref<string[]>([])
@@ -17,76 +15,42 @@ export default defineComponent({
             event.dataTransfer.dropEffect = "copy"
         }
 
-       
-
         const onDrop = (event:any) => {
-           // console.log(index0fActive.value)
-           // let arrayPreAdd = [...imageDataArray.value]
             event.preventDefault()
             let files = event.dataTransfer.files
-                 for (let i = 0; i < files.length; i++){
-                     imageDataArray.value.push(URL.createObjectURL(files[i])) 
-                      //  imageData.value = URL.createObjectURL(files[0])     
+            for (let i = 0; i < files.length; i++){
+            imageDataArray.value.push(URL.createObjectURL(files[i])) 
            }
-           //let arrayPostAdd = imageDataArray.value
-           //console.log(arrayPostAdd.length,arrayPreAdd.length)
-           // index0fActive.value += arrayPostAdd.length-arrayPreAdd.length
-            //console.log(imageGalleryElement.value)
-            //imageGalleryElement.value='imagesSelected'
-            //console.log(imageGalleryElement.value)
-            //console.log(index0fActive.value)
         }
         
         const changePic = (index:number) =>{
             imagePreviewBool.value = true
-            onErrorValue.value = `this.style.display='block'`
             imageData.value=imageDataArray.value[index]
             imageGalleryElement.value='imagesSelected'
             index0fActive.value = index 
-            console.log(index0fActive.value)
         }
 
         const previewImage = (event:any) => {
-           // let arrayPreAdd = [...imageDataArray.value]
                 var input = event.target;
                      // Ensure that you have a file before attempting to read it
                          if (input.files && input.files[0]) {
                                  // create a new FileReader to read this image and convert to base64 format
                                  var reader = new FileReader();
                                     // Define a callback function to run, when FileReader finishes its job
-
                                     reader.onload = (e) => {
                                         // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
                                             // Read image as base64 and set to imageData
                                                // imageData.value = e.target.result;
                                                 let stringHolder:string = e.target.result;
-                                                    imageDataArray.value.push(stringHolder)
-                }
+                                                    imageDataArray.value.push(stringHolder)}
                                                     // Start the reader job - read file as a data url (base64 format)
                                                       reader.readAsDataURL(input.files[0]);
-                                                        //let arrayPostAdd = imageDataArray.value
-                                                        //console.log(arrayPostAdd.length,arrayPreAdd.length)
-                                                       // index0fActive.value += arrayPostAdd.length-arrayPreAdd.length
-                                                        //console.log(index0fActive.value)
-                                                                                                    
-                                                            
-             
-              
-                
             }
         }
             
-
-
-
-
-
-        return {onDrop,onDragOver,previewImage,imageData,imageDataArray,changePic,imageGalleryElement,index0fActive,imagePreview,imagePreviewBool,onErrorValue}
+        return {onDrop,onDragOver,previewImage,changePic,imageData,imageDataArray,imageGalleryElement,index0fActive,imagePreview,imagePreviewBool}
 
         }
-       
-    
-  
 })
 
 </script>
@@ -135,7 +99,6 @@ export default defineComponent({
         gap: 10px;
         width: 100%;
         padding-left: 12px;
-       
         margin-bottom: 20px;
         padding-right: 10px;
         padding-top: 10px;
@@ -223,7 +186,6 @@ export default defineComponent({
         font-size: x-large;
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         color: aliceblue;
-       
         align-items: center;
         display: flex;
         justify-content: center;
@@ -233,10 +195,6 @@ export default defineComponent({
         border: 3px solid #DDD;
         margin-top: 20px;
         margin-bottom: 20px;
-      
-       
-      
-       
     }
 
     .images {
