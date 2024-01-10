@@ -1,6 +1,13 @@
 <script lang="ts">
+
 import { defineComponent,ref,watch } from 'vue';
 
+interface Rover {
+    sol:string
+    roverName: string;
+    availableRovers: {text:string; value:string}[]
+    availableCameras: {text:string; value:string}[]
+}
 
 export default defineComponent({
     setup() {
@@ -33,16 +40,9 @@ export default defineComponent({
             //const alertt = () => alert("fuck you")
 
             const sol = ref<string>("")
+          
+
             
-            watch(sol, () => {
-                sol.value = sol.value.replace(regex,'')
-                if (sol.value.length >4) {
-                    sol.value = sol.value.replace(regexN,'')
-                    
-                }
-               
-            
-            })
                  
 
 
@@ -67,15 +67,93 @@ export default defineComponent({
                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                    //rover app below
                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                   const selectRoverCam = ref<string>('fhaz')
 
+                   const selectedRover = ref<string>('opportunity')
+
+                   const errorDisp = ref<string>('')
                      
 
                         const options = ref([
                         { text: 'fhaz', value: 'fhaz' },
                         { text: 'rhaz', value: 'rhaz' },
                         ])
+                    
+                        const rover:Rover = ref( {
+                            sol: '',
+                            roverName: 'opportunity',
+                            availableRovers:[
+                            {text: 'Opportunity', value:'opportunity'},
+                            {text: 'Curiosity', value:'curiosity'},
+                            {text: 'Spirit', value:'spirit'}
+                        
+                        ],
+                        availableCameras: [
+                            { text: 'fhaz', value: 'fhaz' },
+                            { text: 'rhaz', value: 'rhaz' },
+                            { text: 'navcam', value: 'navcam' },
+                            { text: 'pancam', value: 'pancam' },
+                            { text: 'minites', value: 'minites' }
+                        ]
 
-                    const selectRoverCam = ref<string>('fhaz')
+
+                    }).value
+
+                      
+            watch(rover, () => {
+               rover.sol = rover.sol.replace(regex,'')
+                if (rover.sol.length >4) {
+                    rover.sol = rover.sol.replace(regexN,'')
+                    
+                }
+               
+            
+            })
+
+                    watch(selectedRover, ()=> {
+                        switch(selectedRover.value){
+                            case 'opportunity':
+                                { 
+                                   rover.availableCameras = []
+                                    rover.availableCameras.push(
+                                        { text: 'Fhaz', value: 'fhaz' },
+                                        { text: 'Rhaz', value: 'rhaz' },
+                                        { text: 'Navcam', value: 'navcam' },
+                                        { text: 'Pancam', value: 'pancam' },
+                                        { text: 'Minites', value: 'minites' }
+                                         
+                            )} 
+                            break
+                            case 'curiosity':
+                            { 
+                                   rover.availableCameras = []
+                                    rover.availableCameras.push(
+                                        { text: 'Fhaz', value: 'fhaz' },
+                                        { text: 'Rhaz', value: 'rhaz' },
+                                        { text: 'Mast', value: 'mast' },
+                                        { text: 'Chemcam', value: 'chemcam' },
+                                        { text: 'Mahli', value: 'mahli' },
+                                        { text: 'Mardi', value: 'mardi' },
+                                        { text: 'Navcam', value: 'navcam' },
+                                 
+                                         
+                            )} 
+                            break
+                            case 'spirit':
+                            { 
+                                   rover.availableCameras = []
+                                    rover.availableCameras.push(
+                                        { text: 'Fhaz', value: 'fhaz' },
+                                        { text: 'Rhaz', value: 'rhaz' },
+                                        { text: 'Navcam', value: 'navcam' },
+                                        { text: 'Pancam', value: 'pancam' },
+                                        { text: 'Minites', value: 'minites' }
+                            )} 
+                            break
+                        }
+                    })
+
+                    
 
                    const enlargeImgBool = ref<boolean>(false)
 
@@ -107,7 +185,29 @@ export default defineComponent({
 
                     .then(url=> (url.photos))
 
-                    .then(photosArray => photosArray.forEach(photo=>console.log(imageDataArr.value.push(photo['img_src']))))
+                    .then(photosArray => {
+                        console.log(photosArray)
+                        photosArray.forEach(photo=>imageDataArr.value.push(photo['img_src']))})
+
+                    
+
+                        
+                        
+                      //  if(photo['img_src']===undefined){errorDisp.value=`no pictures have been taken on ${rover.sol} day, on rover ${selectedRover} on camera ${selectRoverCam}. Please try another camera or day or rover`;
+                    //console.log(errorDisp.value)
+
+                       
+                        
+                        
+                         
+
+                    
+
+                    
+
+                    
+
+                    
 
                       
                         // Function to set image dimensions
@@ -151,7 +251,7 @@ export default defineComponent({
         
 
             
-        return {imageData,explanation,date,title,fetchApod,fetchRover,imageDataRover,sol,imageDataArr,roverType,enlargeImgBool,imageSizeOnClick, changeImgSize, index0fActImg, selectRoverCam, options}
+        return {imageData,explanation,date,title,fetchApod,fetchRover,imageDataRover,sol,imageDataArr,roverType,enlargeImgBool,imageSizeOnClick, changeImgSize, index0fActImg, selectRoverCam, options, rover, selectedRover, errorDisp}
 
         }
 })
@@ -182,29 +282,34 @@ export default defineComponent({
                     <div class="bodyGallery">
                   
                         <div class="data-container">
-                            <p>Picture of the day:</p>
+                            <p>Mars rover photos:</p>
                             <br>
-                            <input class="button" v-model="sol"/>
+                            <input class="button" v-model="rover.sol"/>
+                            <br>
 
-                            <select v-model="roverType">
-                                 <option value="opportunity">Opportunity</option>
-                                 <option value="curiosity">Curiosity</option>
-                                 <option value="spirit">Spirit</option>
+                            <select style="color: black;" v-model="selectedRover">
+                                <option v-for="rovers in rover.availableRovers" :value="rovers.value">
+                                    {{ rovers.text }}
+                                </option>
                             </select>
+                            <br>
 
-                            <select v-model="selectRoverCam">
-                                <option v-for="option in options" :value="option.value">
-                                    {{ option.text }}
+                            <select style="color: black;" v-model="selectRoverCam">
+                                <option v-for="cameras in rover.availableCameras" :value="cameras.value">
+                                    {{ cameras.text }}
                                 </option>
                                 </select>
 
-                            <p>{{ `Date: ${date}` }}</p>
-                            <br>
-                            <p>{{ `Title: ${date}` }}</p>
-                            <br>
-                            <p>{{ `Explanation: ${date}` }}</p>
-                            <br>
-                            <button class="button" @click="fetchRover(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverType}/photos?sol=${sol}&camera=${selectRoverCam}&page=1&api_key=1C6088ZVNYInCaU0ldb3icmedNhci1myzg27lO8w`)"> Press me to get data </button>
+                                <br>
+
+                                <p>{{ errorDisp }}</p>
+
+                                <br>
+
+                     
+                         
+                            <button class="button" @click="fetchRover(`https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedRover}/photos?sol=${rover.sol}&camera=${selectRoverCam}&page=1&api_key=1C6088ZVNYInCaU0ldb3icmedNhci1myzg27lO8w`)"> Press me to get data </button>
+                          
                         </div>
                         <div class="imagesContainer">
                             <div  v-for="(image,index) in imageDataArr">
