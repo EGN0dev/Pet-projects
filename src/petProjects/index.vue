@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent,ref } from 'vue';
+import { defineComponent} from 'vue';
 import { RouterLink } from 'vue-router';
 
 
@@ -26,6 +26,7 @@ export default defineComponent({
                 <router-link class="button" to="/calculator">Go to calculator </router-link>
                 <router-link class="button" to="/tictactoe">Go to tictactoe </router-link>
                 <router-link class="button" to="/galleryViewer">Go to galleryViewer </router-link>
+                <router-link class="button" to="/nasaObserver">Go to nasaObserver </router-link>
             </div>
                 <div class="mainContainer">
                     <router-view/>

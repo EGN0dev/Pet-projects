@@ -3,6 +3,7 @@ import index from '../petProjects/index.vue'
 import calculator from '../petProjects/calculator.vue';
 import tictactoe from '../petProjects/tictactoe.vue'
 import galleryViewer from "../petProjects/galleryViewer.vue";
+import nasaObserver from "../petProjects/nasaObserver.vue";
 
 
 const routes = createRouter({
@@ -36,6 +37,14 @@ const routes = createRouter({
         name: "galleryViewer",
         component: galleryViewer
       },
+
+      {
+        path: "/nasaObserver",
+        name: "nasaObserver",
+        component: nasaObserver
+      },
+
+
 
       
     ]

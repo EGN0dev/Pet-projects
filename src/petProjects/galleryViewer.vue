@@ -9,6 +9,7 @@ export default defineComponent({
         const imageData = ref<string>("")
         const imageGalleryElement = ref<string>("images") 
         const index0fActive = ref<number>()
+        
 
         const onDragOver = (event:any) => {
             event.preventDefault()
