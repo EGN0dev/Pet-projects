@@ -1,53 +1,59 @@
 <script lang="ts">
 
 import { defineComponent,ref } from 'vue';
+import VueRouter from 'vue-router'
+import  { contactCheck, userReg, User }  from "./loginBD.ts";
+import router from '../router';
 
-import {hi, arrayOfUsers, } from "./loginBD.ts";
 
-interface Contact {
-    firstName: string;
-    lastName?: string;
-    number: number; 
-    email?: string;
-    id: number;
+
+
+
+
+export interface RegForm {
+    login:string;
+    password:string;
+
 }
 
-interface RegForm {
-    log:string;
-    reg:string;
-}
-
-interface LogForm {
-    log:string;
-    reg:string;
+export interface LogForm {
+    
+    login:string;
+    password:string;
 }
 
 export default defineComponent({
     setup() {
 
-   
+        
 
-
+        const showRegLog = ref<boolean>(true)
 
         const regForm = ref<RegForm> ({
-            log:'',
-            reg:''
+            login:'',
+            password:'',
+        
         })
 
         const logForm = ref<LogForm> ({
-            log:'',
-            reg:''
+            login:'',
+            password:'',
+           
         })
 
 
         const loginForm = () =>{ 
+            contactCheck(logForm.value.login)
+            router.push('/')
            
 
         
         
         }
 
-        const regisForm = () =>{ 
+        const regisForm = (user:User) =>{ 
+            userReg(user)
+
            
 
         
@@ -60,15 +66,8 @@ export default defineComponent({
             const searchBar = ref<string>('')
             const showAllInfo = ref<boolean>(false)
 
-            const allInfoOBjHolder = ref<Contact|{}>()
 
-            
-
-            const filteredContacts = ref<Contact[]>([])
-
-            const showFullContact = (contact:Contact) => {
-                allInfoOBjHolder.value = contact
-            }
+           
 
 
           
@@ -94,7 +93,7 @@ export default defineComponent({
 
                 
                     
-        return {searchBar, filteredContacts, showAllInfo, allInfoOBjHolder, showFullContact, logForm, regForm, loginForm, regisForm}
+        return {searchBar, showAllInfo, logForm, regForm, loginForm, regisForm, showRegLog}
 
         }
 })
@@ -109,24 +108,26 @@ export default defineComponent({
                
                     
 
-                        <div class="login">
+                        <div v-if="showRegLog" class="login">
                             <p>Login</p>
                             <br>
-                            <input class="button" placeholder="login" v-model="logForm.log"/>
+                            <input class="button" placeholder="login" v-model="logForm.login"/>
                             <br>
-                            <input class="button" placeholder="password" v-model="logForm.reg"/>
+                            <input class="button" placeholder="password" v-model="logForm.password"/>
                             <br>
                             <button class="button" @click="loginForm()"> button </button>
+                            <button class="button" @click="()=> showRegLog=false"> Not registered? </button>
 
                         </div>
-                        <div class="register">
+                        <div v-else="!showRegLog" class="register">
                             <p>Register</p>
                             <br>
-                            <input class="button" placeholder="login" v-model="regForm.log"/>
+                            <input class="button" placeholder="login" v-model="regForm.login"/>
                             <br>
-                            <input class="button" placeholder="password" v-model="regForm.reg"/>
+                            <input class="button" placeholder="password" v-model="regForm.password"/>
                             <br>
-                            <button class="button" @click="regisForm()"> button </button>
+                            <button class="button" @click="regisForm({login:regForm.login,password:regForm.password})"> button </button>
+                            <button class="button" @click="()=> showRegLog=true"> Already have an account? </button>
                 
                         </div>
 
