@@ -7,6 +7,7 @@ import nasaObserver from "../petProjects/nasaObserver.vue";
 import contactBook from "../petProjects/contactBook.vue";
 import rxjsPractice from "../petProjects/rxjsPractice.vue";
 import login from "../petProjects/login.vue";
+import memoryGame from "../petProjects/memoryGame.vue";
 
 
 const routes = createRouter({
@@ -63,6 +64,12 @@ const routes = createRouter({
         path: "/login",
         name: "login",
         component: login
+      },
+
+      {
+        path: "/memoryGame",
+        name: "memoryGame",
+        component: memoryGame
       },
 
 

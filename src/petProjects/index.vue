@@ -30,6 +30,7 @@ export default defineComponent({
                 <router-link class="button" to="/contactBook">Go to contactBook </router-link>
                 <router-link class="button" to="/rxjsPractice">Go to rxjsPractice </router-link>
                 <router-link class="button" to="/login">Go to login </router-link>
+                <router-link class="button" to="/memoryGame">Go to memoryGame </router-link>
             </div>
                 <div class="mainContainer">
                     <router-view/>
