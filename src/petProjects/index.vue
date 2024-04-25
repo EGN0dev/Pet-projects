@@ -23,14 +23,14 @@ export default defineComponent({
             
             <div class="navbar">
                 <div class="logo"><p> My pet projects compilation</p></div>
-                <router-link class="button" to="/calculator">Go to calculator </router-link>
-                <router-link class="button" to="/tictactoe">Go to tictactoe </router-link>
-                <router-link class="button" to="/galleryViewer">Go to galleryViewer </router-link>
-                <router-link class="button" to="/nasaObserver">Go to nasaObserver </router-link>
-                <router-link class="button" to="/contactBook">Go to contactBook </router-link>
-                <router-link class="button" to="/rxjsPractice">Go to rxjsPractice </router-link>
-                <router-link class="button" to="/login">Go to login </router-link>
-                <router-link class="button" to="/memoryGame">Go to memoryGame </router-link>
+                <router-link class="buttonIndex" to="/calculator">Go to calculator </router-link>
+                <router-link class="buttonIndex" to="/tictactoe">Go to tictactoe </router-link>
+                <router-link class="buttonIndex" to="/galleryViewer">Go to galleryViewer </router-link>
+                <router-link class="buttonIndex" to="/nasaObserver">Go to nasaObserver </router-link>
+                <router-link class="buttonIndex" to="/contactBook">Go to contactBook </router-link>
+                <router-link class="buttonIndex" to="/rxjsPractice">Go to rxjsPractice </router-link>
+                <router-link class="buttonIndex" to="/login">Go to login </router-link>
+                <router-link class="buttonIndex" to="/memoryGame">Go to memoryGame </router-link>
             </div>
                 <div class="mainContainer">
                     <router-view/>
@@ -68,7 +68,7 @@ body{
     padding-bottom: 7px;
 }
 
-.button {
+.buttonIndex {
     
     padding-top: 5px;
     padding-left: 10px;

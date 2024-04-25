@@ -102,7 +102,7 @@ export default defineComponent({
 
     <template>
      
-        <div class="main">
+        <div class="mainLogin">
             
                
                
@@ -111,23 +111,23 @@ export default defineComponent({
                         <div v-if="showRegLog" class="login">
                             <p>Login</p>
                             <br>
-                            <input class="button" placeholder="login" v-model="logForm.login"/>
+                            <input class="buttonLogin" placeholder="login" v-model="logForm.login"/>
                             <br>
-                            <input class="button" placeholder="password" v-model="logForm.password"/>
+                            <input class="buttonLogin" placeholder="password" v-model="logForm.password"/>
                             <br>
-                            <button class="button" @click="loginForm()"> button </button>
-                            <button class="button" @click="()=> showRegLog=false"> Not registered? </button>
+                            <button class="buttonLogin" @click="loginForm()"> button </button>
+                            <button class="buttonLogin" @click="()=> showRegLog=false"> Not registered? </button>
 
                         </div>
                         <div v-else="!showRegLog" class="register">
                             <p>Register</p>
                             <br>
-                            <input class="button" placeholder="login" v-model="regForm.login"/>
+                            <input class="buttonLogin" placeholder="login" v-model="regForm.login"/>
                             <br>
-                            <input class="button" placeholder="password" v-model="regForm.password"/>
+                            <input class="buttonLogin" placeholder="password" v-model="regForm.password"/>
                             <br>
-                            <button class="button" @click="regisForm({login:regForm.login,password:regForm.password})"> button </button>
-                            <button class="button" @click="()=> showRegLog=true"> Already have an account? </button>
+                            <button class="buttonLogin" @click="regisForm({login:regForm.login,password:regForm.password})"> button </button>
+                            <button class="buttonLogin" @click="()=> showRegLog=true"> Already have an account? </button>
                 
                         </div>
 
@@ -139,7 +139,7 @@ export default defineComponent({
 
 <style>
 
-    .main {
+    .mainLogin {
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
@@ -179,7 +179,7 @@ export default defineComponent({
 
 
 
-    .button {
+    .buttonLogin {
         padding-top: 5px;
         padding-left: 10px;
         padding-right: 10px;

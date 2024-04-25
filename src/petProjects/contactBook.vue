@@ -83,25 +83,25 @@ export default defineComponent({
 
     <template>
      
-        <div class="main">
+        <div class="mainContactBook">
             
                
                
-                    <div class="bodyGallery">
-                        <div class="data-container">
+                    <div class="bodyGalleryContactBook">
+                        <div class="data-containerContactBook">
                             <p>Contacts</p>
                             <br>
-                            <input class="button" placeholder="Search contacts" v-model="searchBar"/>
+                            <input class="buttonContactBook" placeholder="Search contacts" v-model="searchBar"/>
 
                         </div>
-                        <div class="imagesContainer">
+                        <div class="imagesContainerContactBook">
                             <div @click="showFullContact(contact)" v-for="(contact) in filteredContacts">
                                 <p style="color: aliceblue;"> {{contact.firstName}}</p>
                              
                             </div>
                         </div>
 
-                        <div class="imagesContainer">
+                        <div class="imagesContainerContactBook">
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.firstName}}</p>
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.number}}</p>
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.id}}</p>
@@ -114,13 +114,13 @@ export default defineComponent({
 
 <style>
 
-    .main {
+    .mainContactBook {
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
     }
 
-    .bodyGallery {
+    .bodyGalleryContactBook {
         width: 80vw;
         border-color: rgb(2, 4, 6);
         border-radius: 20px;
@@ -134,24 +134,7 @@ export default defineComponent({
         padding-bottom: 20px;
     }
 
-    .imagesSelected {
-        width: 290px;
-        height: 120px;
-        border: 2px solid purple;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: "width 2s";
-    }
-
-    .imagesSelectedEnlarge {
-        width: 59vw;
-        height: 49vh;
-        border: 2px solid purple;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .imagesContainer {    
+    .imagesContainerContactBook {    
         display: flex;
         justify-content: flex-start;
         flex-direction: row;
@@ -167,13 +150,7 @@ export default defineComponent({
         padding-bottom: 10px;
     }
 
-    .image-preview {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-    }
-
-    .data-container {
+    .data-containerContactBook {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         color: aliceblue;
         margin-top: 10px;
@@ -189,7 +166,7 @@ export default defineComponent({
         padding: 20px;   
     }
 
-    .button {
+    .buttonContactBook {
         padding-top: 5px;
         padding-left: 10px;
         padding-right: 10px;

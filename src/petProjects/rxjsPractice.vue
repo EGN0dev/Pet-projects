@@ -94,25 +94,25 @@ const publishedBooksMessage = computed(() => {
 <p>Has published books:</p>
   <span>{{ publishedBooksMessage }}</span>
      
-        <div class="main">
+        <div class="mainRxjsPractice">
             
                
                
-                    <div class="bodyGallery">
-                        <div class="data-container">
+                    <div class="bodyGalleryRxjsPractice">
+                        <div class="data-containerRxjsPractice">
                             <p>Contacts</p>
                             <br>
-                            <input class="button" placeholder="Search contacts" v-model="searchBar"/>
+                            <input class="buttonRxjsPractice" placeholder="Search contacts" v-model="searchBar"/>
 
                         </div>
-                        <div class="imagesContainer">
+                        <div class="imagesContainerRxjsPractice">
                             <div @click="showFullContact(contact)" v-for="(contact) in filteredContacts">
                                 <p style="color: aliceblue;"> {{contact.firstName}}</p>
                              
                             </div>
                         </div>
 
-                        <div class="imagesContainer">
+                        <div class="imagesContainerRxjsPractice">
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.firstName}}</p>
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.number}}</p>
                                     <p style="color: aliceblue;"> {{allInfoOBjHolder?.id}}</p>
@@ -125,13 +125,13 @@ const publishedBooksMessage = computed(() => {
 
 <style>
 
-    .main {
+    .mainRxjsPractice {
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
     }
 
-    .bodyGallery {
+    .bodyGalleryRxjsPractice {
         width: 80vw;
         border-color: rgb(2, 4, 6);
         border-radius: 20px;
@@ -145,24 +145,7 @@ const publishedBooksMessage = computed(() => {
         padding-bottom: 20px;
     }
 
-    .imagesSelected {
-        width: 290px;
-        height: 120px;
-        border: 2px solid purple;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: "width 2s";
-    }
-
-    .imagesSelectedEnlarge {
-        width: 59vw;
-        height: 49vh;
-        border: 2px solid purple;
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .imagesContainer {    
+    .imagesContainerRxjsPractice {    
         display: flex;
         justify-content: flex-start;
         flex-direction: row;
@@ -178,13 +161,7 @@ const publishedBooksMessage = computed(() => {
         padding-bottom: 10px;
     }
 
-    .image-preview {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-    }
-
-    .data-container {
+    .data-containerRxjsPractice {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         color: aliceblue;
         margin-top: 10px;
@@ -200,7 +177,7 @@ const publishedBooksMessage = computed(() => {
         padding: 20px;   
     }
 
-    .button {
+    .buttonRxjsPractice {
         padding-top: 5px;
         padding-left: 10px;
         padding-right: 10px;
