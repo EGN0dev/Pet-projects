@@ -1,0 +1,194 @@
+<script lang="ts">
+import { defineComponent, ref, watch, computed, reactive } from 'vue';
+import { BehaviorSubject, Observable, Subject, asapScheduler, combineLatest, from, fromEvent, interval, merge, pipe,  } from 'rxjs';
+import { filter, first, map, switchMap, tap, withLatestFrom, skipFirst, take, takeUntil, repeat } from "rxjs/operators";
+
+
+interface Contact {
+    firstName: string;
+    lastName?: string;
+    number: number; 
+    email?: string;
+    id: number;
+}
+
+export default defineComponent({
+    setup() {
+
+
+
+
+         
+
+           
+            const regex =  /[0-9]/
+
+            const searchBar = ref<string>('')
+
+            const showAllInfo = ref<boolean>(false)
+
+            const allInfoOBjHolder = ref<Contact|{}>()
+
+            const contactsArr = ref<Contact[]>([
+
+            {firstName:'bill', number: 22342346, id: Math.floor(Math.random()*90000) + 10000},
+            {firstName:'andy', number: 33423467, id: Math.floor(Math.random()*90000) + 10000},
+            {firstName:'dick', number: 42342347, id: Math.floor(Math.random()*90000) + 10000},
+            {firstName:'sandy', number: 9999999, id: Math.floor(Math.random()*90000) + 10000},
+            ])
+
+            const filteredContacts = ref<Contact[]>([])
+
+            const showFullContact = (contact:Contact) => allInfoOBjHolder.value = contact
+            
+
+            watch(searchBar, () => search$.next(searchBar.value))
+
+
+            const search$ = new BehaviorSubject<string>('')
+
+            search$.pipe(
+              map(searchValue=>{
+                allInfoOBjHolder.value = {}
+                searchBar.value = searchBar.value.replace(regex,'')
+                  if (searchBar.value.length > 8) {
+                        searchBar.value = searchBar.value.substring(0,8)}
+
+                if (searchValue === ''){
+                     filteredContacts.value=[]} else {
+                        filteredContacts.value = contactsArr.value.filter(contact => contact.firstName.includes(searchValue))}}
+
+            )
+          ).subscribe()
+
+          const author = reactive({
+  name: 'John Doe',
+  books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+  ]
+})
+
+// a computed ref
+const publishedBooksMessage = computed(() => {
+  return author.books.length > 0 ? 'Yes' : 'No'
+})
+
+                  
+
+              
+
+                
+                    
+        return {searchBar, contactsArr, filteredContacts, showAllInfo, allInfoOBjHolder, showFullContact, publishedBooksMessage, author}
+
+        }
+})
+
+</script>
+
+    <template>
+
+<button @click="()=>author.books=[]">aaaa </button>
+<p>Has published books:</p>
+  <span>{{ publishedBooksMessage }}</span>
+     
+        <div class="mainRxjsPractice">
+            
+               
+               
+                    <div class="bodyGalleryRxjsPractice">
+                        <div class="data-containerRxjsPractice">
+                            <p>Contacts</p>
+                            <br>
+                            <input class="buttonRxjsPractice" placeholder="Search contacts" v-model="searchBar"/>
+
+                        </div>
+                        <div class="imagesContainerRxjsPractice">
+                            <div @click="showFullContact(contact)" v-for="(contact) in filteredContacts">
+                                <p style="color: aliceblue;"> {{contact.firstName}}</p>
+                             
+                            </div>
+                        </div>
+
+                        <div class="imagesContainerRxjsPractice">
+                                    <p style="color: aliceblue;"> {{allInfoOBjHolder?.firstName}}</p>
+                                    <p style="color: aliceblue;"> {{allInfoOBjHolder?.number}}</p>
+                                    <p style="color: aliceblue;"> {{allInfoOBjHolder?.id}}</p>
+                        </div>
+                    </div>
+
+        </div>
+                    
+     </template>
+
+<style>
+
+    .mainRxjsPractice {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    .bodyGalleryRxjsPractice {
+        width: 80vw;
+        border-color: rgb(2, 4, 6);
+        border-radius: 20px;
+        border: 3px solid #DDD;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: auto;
+        padding-left: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+    }
+
+    .imagesContainerRxjsPractice {    
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 20px;
+        border: 3px solid #DDD;
+        gap: 10px;
+        width: 100%;
+        padding-left: 12px;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .data-containerRxjsPractice {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        color: aliceblue;
+        margin-top: 10px;
+        width: 100%;
+        height: 100%;
+        border-color: rgb(2, 4, 6);
+        border-radius: 20px;
+        border: 3px solid #DDD;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: auto;
+        padding: 20px;   
+    }
+
+    .buttonRxjsPractice {
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: rgb(39 39 42);
+        color: rgb(255 255 255);
+        margin-left:5px;
+        margin-top:7px;
+        height: 40px;
+        width: auto;
+        border: solid;
+        border-radius: 30px;
+    }
+
+</style>

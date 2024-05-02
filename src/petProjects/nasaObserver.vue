@@ -53,7 +53,7 @@ export default defineComponent({
 
             const index0fActImg = ref<number>()
 
-            const imageSizeOnClick = ref<string>('imagesSelected')
+            const imageSizeOnClick = ref<string>('imagesSelectedNasaObserver')
 
             const imageDataRover = ref<string>("https://vintagesign.cn/cdn/shop/products/Ins092_8_1200x.jpg?v=1597917906")
 
@@ -128,7 +128,7 @@ export default defineComponent({
 
                 const changeImgSize = (index) => {
                      enlargeImgBool.value = true
-                     imageSizeOnClick.value = 'imagesSelectedEnlarge'
+                     imageSizeOnClick.value = 'imagesSelectedEnlargeNasaObserver'
                      index0fActImg.value = index 
                    }
 
@@ -159,14 +159,14 @@ export default defineComponent({
 
     <template>
      
-        <div class="main">
+        <div class="mainNasaObserver">
             
                
-                    <div class="bodyGallery">
-                        <div class="image-preview">
+                    <div class="bodyGalleryNasaObserver">
+                        <div class="image-previewNasaObserver">
                             <img class="preview" :src="imageData">
                         </div>
-                        <div class="data-container">
+                        <div class="data-containerNasaObserver">
                             <p>Picture of the day:</p>
                             <br>
                             <p>{{ `Date: ${date}` }}</p>
@@ -175,23 +175,23 @@ export default defineComponent({
                             <br>
                             <p>{{ `Explanation: ${explanation}` }}</p>
                             <br>
-                            <button class="button" @click="fetchApod('https://api.nasa.gov/planetary/apod?api_key=1C6088ZVNYInCaU0ldb3icmedNhci1myzg27lO8w')"> Press me to get data </button>
+                            <button class="buttonNasaObserver" @click="fetchApod('https://api.nasa.gov/planetary/apod?api_key=1C6088ZVNYInCaU0ldb3icmedNhci1myzg27lO8w')"> Press me to get data </button>
                         </div>  
                     </div>
-                    <div class="bodyGallery">
-                        <div class="data-container">
+                    <div class="bodyGalleryNasaObserver">
+                        <div class="data-containerNasaObserver">
                             <p>Mars rover photos:</p>
                             <br>
-                            <input class="button" placeholder="Enter day" v-model="rover.sol"/>
+                            <input class="buttonNasaObserver" placeholder="Enter day" v-model="rover.sol"/>
                             <br>
-                                <select class="button" v-model="selectedRover">
+                                <select class="buttonNasaObserver" v-model="selectedRover">
                                     <option value="" disabled selected>Select rover</option>
                                     <option v-for="rovers in rover.availableRovers" :value="rovers.value">
                                         {{ rovers.text }}
                                     </option>
                                 </select>
                             <br>
-                            <select class="button" v-model="selectRoverCam">
+                            <select class="buttonNasaObserver" v-model="selectRoverCam">
                                 <option value="" disabled selected>Select camera</option>
                                 <option v-for="cameras in rover.availableCameras" :value="cameras.value">
                                     {{ cameras.text }}
@@ -202,9 +202,9 @@ export default defineComponent({
                                 <br>
                             <button class="button" @click="fetchRover(`https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedRover}/photos?sol=${rover.sol}&camera=${selectRoverCam}&page=1&api_key=1C6088ZVNYInCaU0ldb3icmedNhci1myzg27lO8w`)"> Press me to get data </button>
                         </div>
-                        <div class="imagesContainer">
+                        <div class="imagesContainerNasaObserver">
                             <div  v-for="(image,index) in imageDataArr">
-                                <img :class="(index==index0fActImg) ? imageSizeOnClick ='imagesSelectedEnlarge' :  imageSizeOnClick='imagesSelected'" :src="image" @click="changeImgSize(index)" >
+                                <img :class="(index==index0fActImg) ? imageSizeOnClick ='imagesSelectedEnlargeNasaObserver' :  imageSizeOnClick='imagesSelectedNasaObserver'" :src="image" @click="changeImgSize(index)" >
                             </div>
                         </div>
                     </div>
@@ -215,13 +215,13 @@ export default defineComponent({
 
 <style>
 
-    .main {
+    .mainNasaObserver {
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
     }
 
-    .bodyGallery {
+    .bodyGalleryNasaObserver {
         width: 80vw;
         border-color: rgb(2, 4, 6);
         border-radius: 20px;
@@ -235,7 +235,7 @@ export default defineComponent({
         padding-bottom: 20px;
     }
 
-    .imagesSelected {
+    .imagesSelectedNasaObserver {
         width: 290px;
         height: 120px;
         border: 2px solid purple;
@@ -244,7 +244,7 @@ export default defineComponent({
         transition: "width 2s";
     }
 
-    .imagesSelectedEnlarge {
+    .imagesSelectedEnlargeNasaObserver {
         width: 59vw;
         height: 49vh;
         border: 2px solid purple;
@@ -252,7 +252,7 @@ export default defineComponent({
         cursor: pointer;
     }
 
-    .imagesContainer {    
+    .imagesContainerNasaObserver {    
         display: flex;
         justify-content: flex-start;
         flex-direction: row;
@@ -268,13 +268,13 @@ export default defineComponent({
         padding-bottom: 10px;
     }
 
-    .image-preview {
+    .image-previewNasaObserver {
         width: 100%;
         height: 100%;
         border-radius: 20px;
     }
 
-    .data-container {
+    .data-containerNasaObserver {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         color: aliceblue;
         margin-top: 10px;
@@ -290,7 +290,7 @@ export default defineComponent({
         padding: 20px;   
     }
 
-    .button {
+    .buttonNasaObserver {
         padding-top: 5px;
         padding-left: 10px;
         padding-right: 10px;
